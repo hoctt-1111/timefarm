@@ -1,0 +1,12 @@
+Bước 1: Lấy tgWebAppData
+- Vào telegram web
+- Mở timefarm lên
+- Nháy chuột phải và chọn Inspect
+- Chọn tab Application > Session Storage > tg-mini.appxxxx
+- Chọn key __telegram__initParams (phía dưới sẽ hiện lên thông tin tgWebAppData)
+Ví dụ: tgWebAppData : 
+"query_id=AAEh1ilcAAAAACHWKVy1Q7fM&user=%7B%22id%22%3A1546245665%2C%22first_name%22%3A%22___iTaChi%22%2C%22last_name%22%3A%22%22%2C%22username%22%3A%22hoctt%22%2C%22language_code%22%3A%22vi%22%2C%22allows_write_to_pm%22%3Atrue%7D&auth_date=1719903366&hash=5ed8783bb1ca77ada896391b2629ebd32206c18d4c9a4dcea4d1fd9edf6e156e"
+- Nháy chuột phải vào chỗ query_id và chọn copy value
+- Paste value đó vào file query.txt
+
+Bước 2: Vào folder đựng script mở command lên và chạy lệnh "py timefarm.py"
