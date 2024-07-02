@@ -2,7 +2,7 @@
 # TimeFarm Bot
 TimeFarm Bot . Subscribe my github and also give stars if you like this tool :) 
 
-Register Here : [TimeFarm](https://t.me/TimeFarmCryptoBot?start=qUeeRhT1womtSdi3)
+Register Here : https://t.me/TimeFarmCryptoBot?start=d0QEWYjOEAL56Gs2
 
 ## Installation
 
@@ -25,7 +25,3 @@ Install with python
 - Auto Handle Error
 - Auto Get Token / Refresh Token
 - Multi Account
-
-## Screenshots
-
-![App Screenshot](https://i.ibb.co.com/QrB5DQp/Cuplikan-layar-2024-06-10-065740.png)
