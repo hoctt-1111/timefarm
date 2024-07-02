@@ -15,12 +15,12 @@ def parse_arguments():
 
     if args.task is None:
         # Jika parameter --upgrade tidak diberikan, minta input dari pengguna
-        task_input = input("Apakah Anda ingin auto claim task? (y/n, default n): ").strip().lower()
+        task_input = input("Do you want to auto claim tasks? (y/n, default n): ").strip().lower()
         # Jika pengguna hanya menekan enter, gunakan 'n' sebagai default
         args.task = task_input if task_input in ['y', 'n'] else 'n'
     
     if args.upgrade is None:
-        upgrade_input = input("Apakah Anda ingin auto upgrade clock? (y/n, default n): ").strip().lower()
+        upgrade_input = input("Do you want auto upgrade clock? (y/n, default n): ").strip().lower()
         args.upgrade = upgrade_input if upgrade_input in ['y', 'n'] else 'n'
 
     return args
@@ -52,7 +52,7 @@ def get_access_token_and_info(query_data):
         response.raise_for_status()  # Akan memicu error jika status bukan 200
         return response.json()
     except json.JSONDecodeError:
-        print(f"JSON Decode Error: Query Anda Salah")
+        print(f"JSON Decode Error: Your Query is Wrong")
         return None
     except requests.RequestException as e:
         print(f"Request Error: {e}")
@@ -128,18 +128,18 @@ def auto_upgrade(token):
         response = upgrade_level(token)
         if 'error' in response:
             if response['error']['message'] == "Not enough balance":
-                print(Fore.RED + Style.BRIGHT + f"\r[ Upgrade ] : Tidak memiliki cukup saldo untuk upgrade.", flush=True)
+                print(Fore.RED + Style.BRIGHT + f"\r[ Upgrade ] : Don't have enough balance to upgrade.", flush=True)
                 break
             elif response['error']['message'] == "Forbidden":
                 print(Fore.RED + Style.BRIGHT + f"\r[ Upgrade ] : Error upgrade.", flush=True)
             elif response['error']['message'] == "Max level reached":
-                print(Fore.RED + Style.BRIGHT + f"\r[ Upgrade ] : Sudah mencapai level maksimal.", flush=True)
+                print(Fore.RED + Style.BRIGHT + f"\r[ Upgrade ] : Has reached the maximum level.", flush=True)
                 break
             else:
                 print(Fore.RED + Style.BRIGHT + f"\r[ Upgrade ] : Error upgrade. {response['error']['message']}", flush=True)
                 break
         else:
-            print(Fore.GREEN + Style.BRIGHT + f"\r[ Upgrade ] : Upgrade berhasil, next..", flush=True)
+            print(Fore.GREEN + Style.BRIGHT + f"\r[ Upgrade ] : Upgrade successfully, next..", flush=True)
 
 # Tambahkan pemanggilan fungsi ini di dalam loop utama jika pengguna memilih untuk auto upgrade
 
@@ -150,26 +150,19 @@ def animated_loading(duration):
     while time.time() < end_time:
         remaining_time = int(end_time - time.time())
         for frame in frames:
-            print(f"\rMenunggu waktu claim berikutnya {frame} - Tersisa {remaining_time} detik         ", end="", flush=True)
+            print(f"\rWaiting for the next claim time {frame} - Remaining {remaining_time} seconds         ", end="", flush=True)
             time.sleep(0.25)
-    print("\rMenunggu waktu claim berikutnya selesai.                            ", flush=True)     
+    print("\rWaiting for the next claim to be completed.                         ", flush=True)
 def print_welcome_message():
-    print(r"""
-          
-█▀▀ █░█ ▄▀█ █░░ █ █▄▄ █ █▀▀
-█▄█ █▀█ █▀█ █▄▄ █ █▄█ █ ██▄
-          """)
     print(Fore.GREEN + Style.BRIGHT + "TimeFarm BOT")
     print(Fore.CYAN + Style.BRIGHT + "Update Link: https://github.com/adearman/timefarm")
     print(Fore.YELLOW + Style.BRIGHT + "Free Konsultasi Join Telegram Channel: https://t.me/ghalibie")
-    print(Fore.BLUE + Style.BRIGHT + "Buy me a coffee :) 0823 2367 3487 GOPAY / DANA")
-    print(Fore.RED + Style.BRIGHT + "NOT FOR SALE ! Ngotak dikit bang. Ngoding susah2 kau tinggal rename :)")
     current_time = datetime.now()
     up_time = current_time - start_time
     days, remainder = divmod(up_time.total_seconds(), 86400)
     hours, remainder = divmod(remainder, 3600)
     minutes, seconds = divmod(remainder, 60)
-    print(Fore.CYAN + Style.BRIGHT + f"Up time bot: {int(days)} hari, {int(hours)} jam, {int(minutes)} menit, {int(seconds)} detik")
+    print(Fore.CYAN + Style.BRIGHT + f"Up time bot: {int(days)} days, {int(hours)} hours, {int(minutes)} minutes, {int(seconds)} seconds")
 
 def extract_user_details(query_line):
     parts = query_line.split('&')
@@ -177,7 +170,7 @@ def extract_user_details(query_line):
     user_info_encoded = user_info_encoded.split('=')[1]
     user_info_json = urllib.parse.unquote(user_info_encoded)
     user_info = json.loads(user_info_json)
-    return user_info.get('username', "Tidak Ada Username"), user_info.get('first_name', "Tidak Ada Firstname"), user_info.get('last_name', "Tidak Ada Lastname")
+    return user_info.get('username', "No Username"), user_info.get('first_name', "No Firstname"), user_info.get('last_name', "No Lastname")
 
 def main():
     while True:
@@ -280,7 +273,7 @@ def main():
                                     if start_farming_response['error']['message'] == "Farming already started":
                                         print(Fore.RED + Style.BRIGHT + f"\r[ Farming ] : Farming Already Started", flush=True)
                                 else:
-                                    print(Fore.RED + Style.BRIGHT + f"\r[ Farming ] : Gagal Start Farming", flush=True)
+                                    print(Fore.RED + Style.BRIGHT + f"\r[ Farming ] : Failed to Start Farming", flush=True)
                         else:
                             print(f"\r[ Farming ] : {farming_response['error']['message']}", flush=True)
                     else:
@@ -301,14 +294,14 @@ def main():
                                             if start_farming_response['error']['message'] == "Farming already started":
                                                 print(Fore.RED + Style.BRIGHT + f"\r[ Farming ] : Farming Already Started", flush=True)
                                         else:
-                                            print(Fore.RED + Style.BRIGHT + f"\r[ Farming ] : Gagal Start Farming", flush=True)
+                                            print(Fore.RED + Style.BRIGHT + f"\r[ Farming ] : Failed Start Farming", flush=True)
                                 else:
                                     print(Fore.YELLOW + Style.BRIGHT + f"\r[ Farming ] : Farming Already Started", flush=True)                              
                 else:
-                    print(Fore.RED + Style.BRIGHT + f"\r[ Farming ] : Gagal Cek Farming", flush=True)
+                    print(Fore.RED + Style.BRIGHT + f"\r[ Farming ] : Failed Farming Check", flush=True)
                     continue
 
-            print(Fore.BLUE + Style.BRIGHT + f"\n==========SEMUA AKUN TELAH DI PROSES==========\n",  flush=True)    
+            print(Fore.BLUE + Style.BRIGHT + f"\n==========ALL ACCOUNTS HAVE BEEN PROCESSED==========\n",  flush=True)
             animated_loading(300)            
         except Exception as e:
             print(f"An error occurred: {str(e)}")

@@ -10,10 +10,10 @@ Install with python
 
 1. Download Python 3.10+
 2. Install Module (pip install requests colorama)
-3. Buka Bot TimeFarm di PC (Telegram Desktop)
-4. Jika sudah terbuka > Klik kanan Inspect
-5. Di Application > Session Storage > tg-mini.appxxxx >
-6. __telegram__initParams ambil tgwebappdata "query_idxxxx" tanpa kutip 
+3. Open TimeFarm Bot on PC (Telegram Desktop)
+4. When it is open > Right click Inspect
+5. In Application > Session Storage > tg-mini.appxxxx >
+6. __telegram__initParams take tgwebappdata "query_idxxxx" without quotes
 7. py timefarm.py / py timefarm.py --task y/n
 
 
